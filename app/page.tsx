@@ -4,8 +4,9 @@ import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { MenuIcon, XIcon } from 'lucide-react'
 import Link from 'next/link'
-import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { ClerkProvider, SignInButton, SignOutButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import { Button } from '@/components/ui/button'
+import Image from 'next/image'
 
 const navigation = [
   { name: 'Product', href: '/' },
@@ -52,14 +53,23 @@ export default function Example() {
               <SignedOut>
                 <SignInButton>
                   <Button
-                  className="bg-primary px-6"
+                  className="auth_btn"
                   >
                     Sign in
                   </Button>
                 </SignInButton>
               </SignedOut>
               <SignedIn>
-                <UserButton />
+                <div className="flex items-center gap-4">
+                  <UserButton />
+                  <SignOutButton>
+                    <Button
+                    className="auth_btn"
+                    >
+                      Log out
+                    </Button>
+                  </SignOutButton>
+                </div>
               </SignedIn>
           </div>
         </nav>
@@ -69,10 +79,12 @@ export default function Example() {
             <div className="flex items-center justify-between">
               <Link href="/" className="-m-1.5 p-1.5">
                 <span className="sr-only">Your Company</span>
-                <img
+                <Image
                   className="h-8 w-auto"
                   src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                   alt=""
+                  width={8}
+                  height={8}
                 />
               </Link>
               <button
@@ -144,7 +156,7 @@ export default function Example() {
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link
                 href="/"
-                className="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                className="rounded-md bg-primary px-8 py-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
               >
                 Get started
               </Link>

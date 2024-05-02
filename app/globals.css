@@ -57,4 +57,8 @@
     body {
       @apply bg-background text-foreground;
     }
+
+    .auth_btn{
+      @apply bg-primary px-6;
+    }
   }
