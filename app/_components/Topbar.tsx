@@ -75,11 +75,12 @@ function Topbar() {
     )
 }
 
+// * Topbar for desktop
 function DesktopTopbar() {
     return (
-        <div className="hidden md:block bg-background border-b border-separate">
+        <div className="hidden md:block bg-background border-b border-b-gray-200 border-separate">
             <nav className="container flex items-center justify-between px-8">
-                <div className="flex h-[80px] min-h-[60px] items-center gap-4">
+                <div className="flex h-[80px] min-h-[60px] items-center gap-10">
                     <Logo />
                     <div className="h-full flex">
                         {

@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { MenuIcon, XIcon } from 'lucide-react'
 import Link from 'next/link'
-import { ClerkProvider, SignInButton, SignOutButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { ClerkProvider, SignInButton, SignOutButton, SignedIn, SignedOut, UserButton, useSession } from '@clerk/nextjs'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 
@@ -15,20 +15,22 @@ const navigation = [
   { name: 'Company', href: '/' },
 ]
 
-export default function Example() {
+export default function RootPage() {
+  const { isLoaded, session, isSignedIn } = useSession();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <div className="bg-white">
+    <div className="bg-white min-h-screen">
       <header className="sticky inset-x-0 top-0 z-50">
         <nav className="flex items-center justify-between px-6 py-4 lg:px-8 border-b shadow-sm" aria-label="Global">
           <div className="flex lg:flex-1">
             <Link href="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Coinly</span>
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=blue&shade=600"
-                alt=""
+              <Image
+                src="/coinly_logo.svg"
+                alt="Coinly Logo"
+                width={40}
+                height={40}
               />
             </Link>
           </div>
@@ -80,11 +82,10 @@ export default function Example() {
               <Link href="/" className="-m-1.5 p-1.5">
                 <span className="sr-only">Your Company</span>
                 <Image
-                  className="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                  alt=""
-                  width={8}
-                  height={8}
+                  src="/coinly_logo.svg"
+                  alt="Coinly Logo"
+                  width={40}
+                  height={40}
                 />
               </Link>
               <button
@@ -155,10 +156,10 @@ export default function Example() {
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link
-                href="/"
+                href={`${session?.user ? "/dashboard" : "/"}`}
                 className="rounded-md bg-primary px-8 py-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
               >
-                Get started
+                {`${session?.user ? "Go to Dashboard" : "Get started"}`}
               </Link>
               <Link href="/" className="text-sm font-semibold leading-6 text-gray-900">
                 Learn more <span aria-hidden="true">→</span>

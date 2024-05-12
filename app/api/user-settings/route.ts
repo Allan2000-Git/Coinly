@@ -27,5 +27,5 @@ export async function GET(request:Request) {
 
     revalidatePath("/dashboard");
 
-    return NextResponse.json(userSettings)
+    return NextResponse.json(userSettings);
 }
