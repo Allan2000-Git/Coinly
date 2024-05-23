@@ -19,7 +19,7 @@ model UserSettings {
 }
 
 model Category {
-  userId String @id
+  userId String
   name  String
   icon  String
   type  String @default("income")
