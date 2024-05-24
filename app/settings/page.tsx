@@ -21,29 +21,31 @@ async function SettingsPage() {
     }
 
     return (
-        <div className="container max-w-xl flex flex-col items-center gap-4 p-4">
+        <div className="container max-w-3xl flex flex-col items-center gap-4 p-4 bg-background">
             <div className="my-5">
                 <Logo />
             </div>
             <h1 className="text-4xl font-bold">Welcome, <span className="text-primary">{user.firstName} {user.lastName}! 👋</span></h1>
             <h2 className="text-gray-400 text-lg">Let&apos;s get started by setting up your currency</h2>
-            <div className="w-full mt-7">
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Currency Type</CardTitle>
-                        <CardDescription>Set the default currency for your transactions</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        <CurrencyComboBox />
-                    </CardContent>
-                </Card>
-                <h3 className="text-sm text-muted-foreground mt-5">You can change these settings anytime</h3>
+            <div className="w-full max-w-xl">
+                <div className="mt-7">
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Currency Type</CardTitle>
+                            <CardDescription>Set the default currency for your transactions</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <CurrencyComboBox />
+                        </CardContent>
+                    </Card>
+                    <h3 className="text-sm text-muted-foreground mt-5">You can change these settings anytime</h3>
+                </div>
+                <Button 
+                className="w-full mt-10"
+                asChild>
+                    <Link href="/dashboard">Save changes</Link>
+                </Button>
             </div>
-            <Button 
-            className="w-full mt-5"
-            asChild>
-                <Link href="/">Save changes</Link>
-            </Button>
         </div>
     )
 }
