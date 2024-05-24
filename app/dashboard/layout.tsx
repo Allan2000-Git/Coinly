@@ -7,7 +7,7 @@ function Layout({children}:{children: ReactNode}) {
         className="relative h-screen w-full flex flex-col"
         >
             <Topbar />
-            <div className="w-full container">
+            <div className="w-full">
                 {children}
             </div>
         </div>

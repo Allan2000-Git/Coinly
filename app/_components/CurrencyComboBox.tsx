@@ -39,12 +39,12 @@ export function CurrencyComboBox() {
         queryFn: async () => {
             const response = await fetch('/api/user-settings')
             if (!response.ok) {
-                throw new Error('Network response was not ok')
+                throw new Error('Something went wrong while fetching user settings.')
             }
             const data = response.json();
             return data;
         },
-    })
+    });
 
     useEffect(() => {
         if(!userSettings) return;
@@ -63,7 +63,7 @@ export function CurrencyComboBox() {
                 id: "update-currency-type"
             })
 
-            const updatedCurrency = currencies.find(c => c.value === data.currency) || null;
+            const updatedCurrency = currencies.find(c => c.value === data.currency);
             setSelectedCurrency(updatedCurrency);
         },
         onError: (err: any) => {
@@ -105,7 +105,7 @@ export function CurrencyComboBox() {
         <Drawer open={open} onOpenChange={setOpen}>
         <DrawerTrigger asChild>
             <Button variant="outline" className="w-full justify-start" disabled={mutation.isPending}>
-            {selectedCurrency ? <>{selectedCurrency.label}</> : <>Set Currency</>}
+                {selectedCurrency ? <>{selectedCurrency.label}</> : <>Set Currency</>}
             </Button>
         </DrawerTrigger>
         <DrawerContent>
@@ -124,6 +124,12 @@ function CurrencyList({
     setOpen: (open: boolean) => void
     setSelectedCurrency: (status: Currency | null) => void
 }) {
+
+    const handleCurrencySelect = (currency: Currency) => {
+        setSelectedCurrency(currency);
+        setOpen(false);
+    };
+
     return (
         <Command>
         <CommandInput placeholder="Currency type..." />
@@ -135,10 +141,7 @@ function CurrencyList({
                 key={currency.value}
                 value={currency.value}
                 disabled={false}
-                onSelect={(value: string) => {
-                    setSelectedCurrency(currencies.find((priority) => priority.value === value) || null)
-                    setOpen(false)
-                }}
+                onSelect={() => handleCurrencySelect(currency)}
                 >
                 {currency.label}
                 </CommandItem>
