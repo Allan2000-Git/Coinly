@@ -4,9 +4,10 @@ import { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { MenuIcon, XIcon } from 'lucide-react'
 import Link from 'next/link'
-import { ClerkProvider, SignInButton, SignOutButton, SignedIn, SignedOut, UserButton, useSession } from '@clerk/nextjs'
+import { SignInButton, SignOutButton, SignedIn, SignedOut, UserButton, useSession } from '@clerk/nextjs'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
+import { ThemeSwitchButton } from './_components/ThemeSwitchButton'
 
 const navigation = [
   { name: 'Product', href: '/' },
@@ -20,7 +21,7 @@ export default function RootPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-background min-h-screen">
       <header className="sticky inset-x-0 top-0 z-50">
         <nav className="flex items-center justify-between px-6 py-4 lg:px-8 border-b shadow-sm" aria-label="Global">
           <div className="flex lg:flex-1">
@@ -46,12 +47,12 @@ export default function RootPage() {
           </div>
           <div className="hidden lg:flex lg:gap-x-12">
             {navigation.map((item) => (
-              <Link key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-gray-900">
+              <Link key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-gray-900 text-primary">
                 {item.name}
               </Link>
             ))}
           </div>
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end gap-4">
               <SignedOut>
                 <SignInButton>
                   <Button
@@ -73,6 +74,7 @@ export default function RootPage() {
                   </SignOutButton>
                 </div>
               </SignedIn>
+              <ThemeSwitchButton />
           </div>
         </nav>
         <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
@@ -140,7 +142,7 @@ export default function RootPage() {
         <div className="mx-auto max-w-3xl py-32">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
             <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-              New features rolling out soon. Watch this space.
+              <span className="text-primary">New features rolling out soon. Watch this space.</span>
               <Link href="/" className="font-semibold text-primary ml-2">
                 <span className="absolute inset-0" aria-hidden="true" />
                 Read more <span aria-hidden="true">&rarr;</span>
@@ -151,17 +153,18 @@ export default function RootPage() {
             <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-[#2F80ED] via-[#2D9EE0] to-[#091E3A] text-transparent bg-clip-text sm:text-6xl sm:leading-[4.5rem]">
               Master Your Finances with Coinly
             </h1>
-            <p className="mt-6 text-lg leading-8 text-gray-600">
+            <p className="mt-6 text-lg leading-8 text-gray-600 text-primary">
             Simplify Budgeting, Track Spending, Set Savings Goals, Visualize Financial Trends, and Achieve Financial Freedom with Ease and Confidence
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link
                 href={`${session?.user ? "/dashboard" : "/"}`}
-                className="rounded-md bg-primary px-8 py-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                className="rounded-md bg-primary px-8 py-3 text-sm font-semibold shadow-sm hover:bg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600
+                dark:bg-white dark:text-black"
               >
                 {`${session?.user ? "Go to Dashboard" : "Get started"}`}
               </Link>
-              <Link href="/" className="text-sm font-semibold leading-6 text-gray-900">
+              <Link href="/" className="text-sm font-semibold leading-6 text-gray-900 text-primary">
                 Learn more <span aria-hidden="true">→</span>
               </Link>
             </div>
