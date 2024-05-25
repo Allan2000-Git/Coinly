@@ -30,6 +30,7 @@ export const currencies: Currency[] = [
         value: "CNY",
         label: "¥ Yuan",
         locale: "zh-CN"
-    }
-    
-]
+    } 
+];
+
+export const MAX_DATE_RANGE_DAYS_ALLOWED = 90;

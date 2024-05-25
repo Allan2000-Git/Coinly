@@ -18,7 +18,7 @@ export async function GET(request:Request) {
     const paramType = typeValidator.safeParse(queryType);
 
     if(!paramType.success){
-        return NextResponse.json(paramType.error, {
+        return NextResponse.json(paramType.error.message, {
             status: 500
         });
     }
