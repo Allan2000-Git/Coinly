@@ -5,6 +5,7 @@ import prisma from '@/lib/prisma';
 import { Button } from '@/components/ui/button';
 import CreateTransaction from '@/app/_components/CreateTransaction';
 import Overview from '../_components/Overview';
+import History from '../_components/History';
 
 async function Dashboard() {
     const user = await currentUser();
@@ -47,6 +48,7 @@ async function Dashboard() {
                 </div>
             </div>
             <Overview userSettings={userSettings} />
+            <History userSettings={userSettings} />
         </div>
     )
 }
